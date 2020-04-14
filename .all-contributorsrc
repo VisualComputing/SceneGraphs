@@ -1,0 +1,28 @@
+{
+  "projectName": "Transformations",
+  "projectOwner": "VisualComputing",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "contributors": [
+    {
+      "login": "nakednous",
+      "name": "Jean Pierre Charalambos",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/645599?v=4",
+      "profile": "https://github.com/nakednous",
+      "contributions": [
+        "code",
+        "doc",
+        "bug",
+        "design",
+        "ideas",
+        "question",
+        "talk",
+        "test",
+        "tool"
+      ]
+    }
+  ]
+}
