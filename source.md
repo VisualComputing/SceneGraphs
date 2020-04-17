@@ -61,11 +61,12 @@ Consider the following sequence of transformations:
 which is the same as: <!-- .element: class="fragment" data-fragment-index="5"-->
 `$P_n=M_n^*P$, where $M_n^*=M_n...M_2M_1$` <!-- .element: class="fragment" data-fragment-index="6"-->
 
-Mnemonic 1:<!-- .element: class="fragment" data-fragment-index="7"-->
-   The (right-to-left) $M_1M_2...M_n$ transformation sequence is performed respect to a world (fixed) coordinate system
-
-Mnemonic 2:<!-- .element: class="fragment" data-fragment-index="8"-->
+Mnemonic:<!-- .element: class="fragment" data-fragment-index="7"-->
    The (left-to-right) $M_n,...M_2M_1$ transformation sequence is performed respect to a local (mutable) coordinate system
+
+N:
+
+Mnemonic 2: The (right-to-left) $M_1M_2...M_n$ transformation sequence is performed respect to a world (fixed) coordinate system
 
 V:
 
@@ -95,7 +96,7 @@ H:
 
 ## Modelling and view: Node notion
 
-> Mnemonic 2: The (left-to-right) $M_n,...M_2M_1$ transformation sequence is performed respect to a local (mutable) coordinate system
+> Mnemonic: The (left-to-right) $M_n,...M_2M_1$ transformation sequence is performed respect to a local (mutable) coordinate system
 
 A "node" encapsulates a local coordinate system <!-- .element: class="fragment" data-fragment-index="1"-->
 
