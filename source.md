@@ -43,6 +43,9 @@ H:
 
 <img height='300' src='fig/image3.JPG'/>
 
+1. Check the Processing [2D transformations](https://processing.org/tutorials/transform2d/) tutorial by _J David Eisenberg_ first
+2. Check also the [affine transformations](http://visualcomputing.github.io/Transformations) presentation
+
 N:
 
 * Standard = Canonical
