@@ -29,6 +29,7 @@ H:
 
  1. Intro<!-- .element: class="fragment" data-fragment-index="1"-->
     * Active vs pasive transformations
+    * Composition
     * Main spaces (missed)
  2. Modelling and view<!-- .element: class="fragment" data-fragment-index="2"-->
  3. Matrix handling in the nub framework<!-- .element: class="fragment" data-fragment-index="3"-->
@@ -48,8 +49,7 @@ N:
 
 V:
 
-## Affine transformations: Composition
-### Notion
+## Intro: Affine transformations composition
 
 Consider the following sequence of transformations:
 
@@ -66,6 +66,30 @@ Mnemonic 1:<!-- .element: class="fragment" data-fragment-index="7"-->
 
 Mnemonic 2:<!-- .element: class="fragment" data-fragment-index="8"-->
    The (left-to-right) $M_n,...M_2M_1$ transformation sequence is performed respect to a local (mutable) coordinate system
+
+V:
+
+## Intro: Main spaces
+
+<figure>
+    <img height='400' src='fig/coordinate_systems.png'/>
+    <figcaption>Matrix transform operations</figcaption>
+</figure>
+
+V:
+
+## Intro: Main spaces
+
+<figure>
+    <img height='400' src='fig/rendering_pipeline.png'/>
+    <figcaption>Opengl Rendering Pipeline</figcaption>
+</figure>
+
+N:
+
+1. Virtual camera: vertex specification & vertex shader
+2. Shading: fragment shader
+3. Visibility (z-buffer): per sample operations
 
 H:
 
