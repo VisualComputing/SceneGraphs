@@ -30,14 +30,15 @@ H:
  1. Intro<!-- .element: class="fragment" data-fragment-index="1"-->
     * Active vs pasive transformations
     * Composition
-    * Main spaces (missed)
+    * Main spaces
  2. Modelling and view<!-- .element: class="fragment" data-fragment-index="2"-->
  3. Matrix handling in the nub framework<!-- .element: class="fragment" data-fragment-index="3"-->
  4. References<!-- .element: class="fragment" data-fragment-index="4"-->
+ 5. Annex: mnemonic 2.<!-- .element: class="fragment" data-fragment-index="5"-->
  
 H:
 
-## Intro: Active vs pasive transformations
+## Intro: Active vs passive transformations
 
 <font color="yellow"> Active Transformation (standard basis) vs Passive Transformation (change of basis)</font>
 
@@ -80,17 +81,9 @@ V:
     <figcaption>Matrix transform operations</figcaption>
 </figure>
 
-V:
-
-## Intro: Main spaces
-
-<figure>
-    <img height='400' src='fig/rendering_pipeline.png'/>
-    <figcaption>Opengl Rendering Pipeline</figcaption>
-</figure>
-
 N:
 
+rendering_pipeline.png
 1. Virtual camera: vertex specification & vertex shader
 2. Shading: fragment shader
 3. Visibility (z-buffer): per sample operations
@@ -570,3 +563,235 @@ H:
 * [Processing 2d transformations tutorial](https://www.processing.org/tutorials/transform2d/)
 * [OpenGL projection matrix](http://www.songho.ca/opengl/gl_projectionmatrix.html)
 * [The Perspective and Orthographic Projection Matrix](https://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix)
+
+H:
+
+## Annex: mnemonic 2.
+## Affine transformations: Composition
+### Notion
+
+Consider the following sequence of transformations:
+
+`$P_1=M_1P,$` <!-- .element: class="fragment" data-fragment-index="1"-->
+`$P_2=M_2P_1,$` <!-- .element: class="fragment" data-fragment-index="2"-->
+`$...,$` <!-- .element: class="fragment" data-fragment-index="3"-->
+`$P_n=M_nP_{n-1}$` <!-- .element: class="fragment" data-fragment-index="4"-->
+
+which is the same as: <!-- .element: class="fragment" data-fragment-index="5"-->
+`$P_n=M_n^*P$, where $M_n^*=M_n...M_2M_1$` <!-- .element: class="fragment" data-fragment-index="6"-->
+
+Mnemonic 2:<!-- .element: class="fragment" data-fragment-index="7"-->
+   The (right-to-left) $M_1M_2...M_n$ transformation sequence is performed respect to a world (fixed) coordinate system
+
+V:
+
+## Affine transformations: Composition
+### Mnemonic 2 examples: Scaling respect to $(x_f,y_f)$
+
+<figure>
+    <img height="400" src="fig/image12.JPG">
+</figure>
+
+V:
+
+## Affine transformations: Composition
+### Mnemonic 2 examples: Scaling respect to $(x_f,y_f)$
+
+<figure>
+    <img height="400" src="fig/image13.JPG">
+    <figcaption>$T(x_f,y_f)S(sx,sy)T(-x_f,-y_f)P$</figcaption>
+</figure>
+
+V:
+
+## Affine transformations: Composition
+### Mnemonic 2 examples: Scaling respect to $(x_r,y_r)$
+$T(x_f,y_f)S(sx,sy)T(-x_f,-y_f)$ Processing implementation
+
+<div id='scaling2d_id'></div>
+
+V:
+
+## Affine transformations: Composition
+### Mnemonic 2 examples: Rotation respect to $(x_r,y_r)$, $\beta$
+
+<figure>
+    <img height="400" src="fig/image10.JPG">
+</figure>
+
+V:
+
+## Affine transformations: Composition
+### Mnemonic 2 examples: Rotation respect to $(x_r,y_r)$, $\beta$
+
+<figure>
+    <img height="400" src="fig/image11.png">
+    <figcaption>$T(x_r,y_r)R_z(\beta)T(-x_r,-y_r)P$</figcaption>
+</figure>
+
+V:
+
+## Affine transformations: Composition
+### Mnemonic 2 examples: Rotation respect to $(x_r,y_r)$, $\beta$
+$T(x_r,y_r)R_z(\beta)T(-x_r,-y_r)$ Processing implementation
+
+<div id='rotation_id'></div>
+
+V:
+
+## Affine transformations: Composition
+### Mnemonic 2 examples: Rotation respect to $(x_r,y_r)$, $\beta$
+$T(x_r,y_r)R_z(\beta)T(-x_r,-y_r)$ Processing implementation: `applyMatrix()`
+
+```processing
+float xr=500, yr=250;
+float beta = -QUARTER_PI;
+
+void draw() {
+  background(0);
+  // We do the rotation as: T(xr,yr)Rz(β)T(−xr,−yr)
+  // 1. T(xr,yr)
+  applyMatrix(1, 0, 0, xr, 
+              0, 1, 0, yr, 
+              0, 0, 1, 0, 
+              0, 0, 0, 1);
+  // 2. Rz(β)
+  applyMatrix(cos(beta), -sin(beta), 0, 0, 
+              sin(beta), cos(beta),  0, 0, 
+              0,         0,          1, 0, 
+              0,         0,          0, 1);
+  // 3. T(−xr,−yr)
+  applyMatrix(1, 0, 0, -xr, 
+              0, 1, 0, -yr, 
+              0, 0, 1, 0, 
+              0, 0, 0, 1);
+  // drawing code follows
+} 
+```
+
+V:
+
+## Affine transformations: Composition
+### Mnemonic 2 examples: Rotation respect to $(x_r,y_r)$, $\beta$
+$T(x_r,y_r)R_z(\beta)T(-x_r,-y_r)$ Processing implementation: `translation()` and `rotation()`
+
+```processing
+float xr=500, yr=250;
+float beta = -QUARTER_PI;
+
+void draw() {
+  background(0);
+  // 1. T(xr,yr)
+  translate(xr, yr);
+  // 2. Rz(β)
+  rotate(beta);
+  // 3. T(−xr,−yr)
+  translate(-xr, -yr);
+  // drawing code follows
+} 
+```
+
+V:
+
+## Affine transformations: Composition
+### Mnemonic 2 examples: 3D Rotation `$T(x_1,y_1,z_1) * R_u(\beta) * T(-x_1,-y_1,-z_1)$`
+
+<div class="ulist">
+    <img src="fig/rotation_overview.png" alt="3d rotation" width="40%" style="float: left">
+    <ul style="width: 50%;">
+        <p>
+        let $v = p_2 - p_1$
+        </p>
+        <p>
+        $u = v / |v| = (a, b, c)$
+        </p>
+        <p>
+        $a = (x_2 - x_1) / |v|$
+        </p>
+        <p>
+        $b = (y_2 - y_1) / |v|$
+        </p>
+        <p>
+        $c = (z_2 - z_1) / |v|$
+        </p>
+    </ul>
+</div>
+
+V:
+
+## Affine transformations: Composition
+### Mnemonic 2 examples: 3D Rotation `$T(x_1,y_1,z_1) * R_u(\beta) * T(-x_1,-y_1,-z_1)$`
+
+<figure>
+    <img height="550" src="fig/rotation.png">
+    <figcaption>`$T(x_1,y_1,z_1) * R_x(-\alpha) * R_y(-\lambda) * R_z(\beta) * R_y(\lambda)  * R_x(\alpha) * T(-x_1,-y_1,-z_1)$`</figcaption>
+</figure>
+
+V:
+
+## Affine transformations: Composition
+### Mnemonic 2 examples: 3D Rotation `$T(x_1,y_1,z_1) * R_u(\beta) * T(-x_1,-y_1,-z_1)$`
+#### Step 2
+
+<div class="ulist">
+    <img src="fig/step2.png" alt="3d rotation: step 2" width="40%" style="float: left">
+    <ul style="width: 50%;">
+        <p>
+        $u = (a, b, c)$
+        </p>
+        <p>
+        $u'= (0,b,c)$
+        </p>
+        <p>
+        $\cos \alpha = (u' \bullet u_z) / ( |u'| |u_z| )$, note that $|u_z| = 1$
+        </p>
+        <p>
+        $\cos \alpha = c/d$, where $d = |u'| = \sqrt{(b^2 + c^2)}$
+        </p>
+        <p class="fragment" data-fragment-index="1">
+        since $\cos ^ 2 \alpha + \sin ^ 2 \alpha = 1$
+        </p>
+        <p class="fragment" data-fragment-index="1">
+        $\sin \alpha = b/d$
+        </p>
+    </ul>
+</div>
+
+V:
+
+## Affine transformations: Composition
+### Mnemonic 2 examples: 3D Rotation `$T(x_1,y_1,z_1) * R_u(\beta) * T(-x_1,-y_1,-z_1)$`
+#### Step 3
+
+<div class="ulist">
+    <img src="fig/step3.png" alt="3d rotation: step 3" width="40%" style="float: left">
+    <ul style="width: 50%;">
+        <p>
+        $u = (a, b, c)$
+        </p>
+        <p>
+        $u'= (0,b,c)$
+        </p>
+        <p>
+        $u''=(a,0,d)$, $d = sqrt{(b^2+c^2)}$
+        </p>
+        <p>
+        $\cos \lambda = (u'' \bullet u_z) / ( |u''| |u_z| )$
+        </p>
+        <p>
+        since $|u''|=|u_z|=1$
+        </p>
+        <p>
+        $\cos \lambda = d$
+        </p>
+        <p class="fragment" data-fragment-index="1">
+        since $\cos ^ 2 \lambda + \sin ^ 2 \lambda = 1$ and $|u| = 1$
+        </p>
+        <p class="fragment" data-fragment-index="1">
+        $\sin \lambda = a$, note that the actual angle we need is $-\lambda$
+        </p>
+        <p class="fragment" data-fragment-index="1">
+        $\sin -\lambda = -a$ (unlike $\cos$, $\sin$ is an odd function)
+        </p>
+    </ul>
+</div>
