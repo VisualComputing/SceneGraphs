@@ -16,12 +16,12 @@
  | \
  L2  L3
  
- The scene-graph has en eye frame used to navigate the scene.
+ The scene-graph has en eye node used to navigate the scene.
  
  Using off-screen rendering we draw the above scene-graph twice.
  See: https://p5js.org/reference/#/p5/createGraphics
  
- The eye frame is typically used to navigate the scene where it
+ The eye node is typically used to navigate the scene where it
  is defined. Here, however, the main scene eye (canvas1) is used
  to navigate the minimap scene (canvas2). 
  
@@ -103,7 +103,7 @@ var sketch = function( p ) {
     
     function scene(pg) {
         axes(pg);
-        // define a local frame L1 (respect to the world)
+        // define a local node L1 (respect to the world)
         pg.push();
         pg.translate(400, 40);
         pg.rotate(p.QUARTER_PI / 2);
@@ -111,7 +111,7 @@ var sketch = function( p ) {
         // draw a robot in L1
         pg.fill(255, 0, 255);
         robot(pg);
-        // define a local frame L2 respect to L1
+        // define a local node L2 respect to L1
         pg.push();
         pg.translate(200, 300);
         pg.rotate(-p.QUARTER_PI);
@@ -138,7 +138,7 @@ var sketch = function( p ) {
     };
     
     function drawEye() {
-        // define an eye frame L1 (respect to the world)
+        // define an eye node L1 (respect to the world)
         canvas1.push();
         // the position of the minimap rect is defined according to eye parameters as:
         // T(eyePosition)*R(eyeOrientation)*S(eyeScaling)

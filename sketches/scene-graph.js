@@ -16,7 +16,7 @@
   | \
  L2  L3
  
- Each frame is defined by a single affine transformation
+ Each node is defined by a single affine transformation
  or by a composition of several affine transformations read in
  left-to-right order (top-down in the code).
  Refer to the 'mnemonic rule 2' in the presentation.
@@ -26,7 +26,7 @@
  See: https://p5js.org/reference/#/p5/push
       https://p5js.org/reference/#/p5/pop
  
- A scene-graph with an eye frame is implemented in the MiniMap sketch
+ A scene-graph with an eye node is implemented in the MiniMap sketch
 */
 
 var sketch = function( p ) {
@@ -38,7 +38,7 @@ var sketch = function( p ) {
     p.draw = function() {
         p.background(50);
         axes();
-        // define a local frame L1 (respect to the world)
+        // define a local node L1 (respect to the world)
         p.push();
         p.translate(400, 40);
         p.rotate(p.QUARTER_PI / 2);
@@ -46,7 +46,7 @@ var sketch = function( p ) {
         // draw a robot in L1
         p.fill(255, 0, 255);
         robot();
-        // define a local frame L2 respect to L1
+        // define a local node L2 respect to L1
         p.push();
         p.translate(200, 300);
         p.rotate(-p.QUARTER_PI);
