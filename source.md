@@ -542,16 +542,15 @@ V:
 * Use [projection()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#projection--) to retrieve the cached _projection_ matrix computed with the scene [eye()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#eye--).
 * Use [view()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#view--) to retrieve the cached _view_ matrix computed with the scene [eye()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#eye--).
 * Use [projectionView()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#projectionView--) to retrieve the cached _projection_ times _view_ matrix.
-* Use [projectionViewInverse()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#projectionViewInverse--) to retrieve the cached _projection_ times _view_ inverse matrix (requires to call [cacheProjectionViewInverse()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#cacheProjectionViewInverse-boolean-) first).
+* Use [projectionViewInverse()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#projectionViewInverse--) to retrieve the cached _projection_ times _view_ inverse matrix.
 
 V:
 
 ## Matrix handling in [nub](https://visualcomputing.github.io/nub-javadocs/)
 ### Main methods to compute the scene projection matrices
 
-* Use [projection(type, width, height, zNear, zFar)](https://visualcomputing.github.io/nub-javadocs/nub/processing/Scene.html#projection-nub.core.Node-nub.core.Graph.Type-float-float-float-float-) to retrieve the node _projection_ matrix.
-    * Use [orthographic(width, height, zNear, zFar)](https://visualcomputing.github.io/nub-javadocs/nub/processing/Scene.html#orthographic-nub.core.Node-float-float-float-float-) to retrieve the _orthographic_ matrix.
-    * Use [perspective(aspectRatio, zNear, zFar)](https://visualcomputing.github.io/nub-javadocs/nub/processing/Scene.html#perspective-nub.core.Node-float-float-float-) to retrieve the _perspective_ matrix.
+* Use [orthographic(width, height, zNear, zFar)](https://visualcomputing.github.io/nub-javadocs/nub/primitives/Matrix.html#orthographic-float-float-float-float-) to compute the _orthographic_ matrix.
+* Use [perspective(magnitude, aspectRatio, zNear, zFar)](https://visualcomputing.github.io/nub-javadocs/nub/primitives/Matrix.html#perspective-float-float-float-float-) to compute the _perspective_ matrix.
 
 H:
 
