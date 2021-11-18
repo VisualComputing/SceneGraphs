@@ -531,18 +531,18 @@ V:
 ## Matrix handling in [nub](https://visualcomputing.github.io/nub-javadocs/)
 ### Main methods to retrieve the node matrices
 
-* Use [worldMatrix()](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#worldMatrix--) to retrieve the node _model_ matrix
-* Use [view()](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#view--) to retrieve the node _view_ matrix.
+* Use [worldMatrix()](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#worldMatrix()) to retrieve the node _model_ matrix
+* Use [view()](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#view()) to retrieve the node _view_ matrix.
 
 V:
 
 ## Matrix handling in [nub](https://visualcomputing.github.io/nub-javadocs/)
 ### Main methods to retrieve the scene cached matrices
 
-* Use [projection()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#projection--) to retrieve the cached _projection_ matrix computed with the scene [eye()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#eye--).
-* Use [view()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#view--) to retrieve the cached _view_ matrix computed with the scene [eye()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#eye--).
-* Use [projectionView()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#projectionView--) to retrieve the cached _projection_ times _view_ matrix.
-* Use [projectionViewInverse()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#projectionViewInverse--) to retrieve the cached _projection_ times _view_ inverse matrix.
+* Use [projection()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#projection()) to retrieve the cached _projection_ matrix computed with the scene [eye()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#eye()).
+* Use [view()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#view()) to retrieve the cached _view_ matrix computed with the scene [eye()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#eye()).
+* Use [projectionView()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#projectionView()) to retrieve the cached _projection_ times _view_ matrix.
+* Use [projectionViewInverse()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#projectionViewInverse()) to retrieve the cached _projection_ times _view_ inverse matrix.
 
 V:
 
