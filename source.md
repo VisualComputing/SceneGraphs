@@ -549,8 +549,8 @@ V:
 ## Matrix handling in [nub](https://visualcomputing.github.io/nub-javadocs/)
 ### Main methods to compute the scene projection matrices
 
-* Use [orthographic(width, height, zNear, zFar)](https://visualcomputing.github.io/nub-javadocs/nub/primitives/Matrix.html#orthographic-float-float-float-float-) to compute the _orthographic_ matrix.
-* Use [perspective(magnitude, aspectRatio, zNear, zFar)](https://visualcomputing.github.io/nub-javadocs/nub/primitives/Matrix.html#perspective-float-float-float-float-) to compute the _perspective_ matrix.
+* Use [orthographic(width, height, zNear, zFar)](https://visualcomputing.github.io/nub-javadocs/nub/primitives/Matrix.html#orthographic%28float,float,float,float%29) to compute the _orthographic_ matrix.
+* Use [perspective(magnitude, aspectRatio, zNear, zFar)](https://visualcomputing.github.io/nub-javadocs/nub/primitives/Matrix.html#perspective%28float,float,float,float%29) to compute the _perspective_ matrix.
 
 H:
 
