@@ -86,7 +86,7 @@ V:
 Consider the function `axes()` which draws the X (horizontal) and Y vertical) axes:
 
 ```processing
-void axes() {
+function axes() {
   pushStyle();
   // X-Axis
   strokeWeight(4);
@@ -424,22 +424,22 @@ V:
  n2  n3
 ```
 
-```processing
-void draw() {
+```js
+function draw() {
   // enter n1
   push();
   applyMatrix(n1.matrix());
-  scene.draw(n1);
+  draw(n1);
   // enter n2
   push();
   applyMatrix(n2.matrix());
-  scene.draw(n2);
+  draw(n2);
   // "return" to n1
   pop();
   // enter n3
   push();
   applyMatrix(n3.matrix());
-  scene.draw(n3);
+  draw(n3);
   // return to n1
   pop();
   // return to World
@@ -452,7 +452,7 @@ V:
 ## Modelling and view in [nub](https://visualcomputing.github.io/nub-javadocs/)
 ### [Node](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html) automatic traversals
 
-```processing
+```js
  World
   ^
   |\
@@ -462,9 +462,9 @@ V:
  n2  n3
 ```
 
-```processing
-void draw() {
-  scene.render();
+```js
+function draw() {
+  render();
 }
 ```
 
