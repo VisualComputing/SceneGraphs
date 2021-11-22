@@ -67,15 +67,7 @@ Observation 1: `$M_n^$` may be implemented either as above with low-level matrix
 
 H:
 
-## Modelling and view: Node notion
-
-> Mnemonic: The (left-to-right) $M_n,...M_2M_1$ transformation sequence is performed respect to a local (mutable) coordinate system
-
-A "node" encapsulates a local coordinate system <!-- .element: class="fragment" data-fragment-index="1"-->
-
-V:
-
-## Modelling and view: Node notion
+## Modelling and view
 
 Consider the function `axes()` which draws the X (horizontal) and Y vertical) axes:
 
@@ -99,7 +91,7 @@ function axes() {
 
 V:
 
-## Modelling and view: Node notion
+## Modelling and view
 
 let's first call the `axes()` function to see what it does:
 
@@ -115,7 +107,7 @@ function draw() {
 
 V:
 
-## Modelling and view: Node notion
+## Modelling and view
 
 now let's call it again, but pre-translating it first:
 
@@ -133,7 +125,7 @@ function draw() {
 
 V:
 
-## Modelling and view: Node notion
+## Modelling and view
 
 let's add a rotation to the second `axes()` call:
 
@@ -152,7 +144,7 @@ function draw() {
 
 V:
 
-## Modelling and view: Node notion
+## Modelling and view
 
 let's do something similar with a third `axes()` call:
 
@@ -175,7 +167,7 @@ function draw() {
 
 V:
 
-## Modelling and view: Node notion
+## Modelling and view
 
 see the result when we animate only the _first_ rotation;
 
@@ -198,7 +190,7 @@ function draw() {
 
 V:
 
-## Modelling and view: Node notion
+## Modelling and view
 
 and now see the result when we animate only the _second_ rotation;
 
@@ -221,11 +213,10 @@ function draw() {
 
 V:
 
-## Modelling and view: Node notion
+## Modelling and view
+### Node notion
 
-> A node encapsulates an affine (composed) transform: `$M_i^*, 1 \geq i$` read in left-to-right order (<a href="#/3/1">goto mnemonic</a>)
-
-> Note that the `$T(x,y,z) * R_u(\beta) * S(s)$`, `$s > 0$` definition is the one used in [nub](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html)
+> A node in [nub](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html) encapsulates the following affine (composed) transform: `$T(x,y,z) * R_u(\beta) * S(s)$`, `$s > 0$` read in left-to-right order (<a href="#/3/1">goto observation</a>)
 
 V:
 
