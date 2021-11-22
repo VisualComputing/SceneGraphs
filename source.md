@@ -459,7 +459,7 @@ V:
 <li class="fragment"> The scene gets automatically rendered respect to the `eye` node
 <li class="fragment"> The graph topology is set (even at run time) with [setReference(node)](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#setReference-nub.core.Node-).
 <li class="fragment"> Nodes may be picked using ray-casting and the scene provides all sorts of interactivity commands to manipulate them.
-<li class="fragment"> [setTranslation(Vector)](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#setTranslation-nub.primitives.Vector-), [translate(Vector)](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#translate-nub.primitives.Vector-), [setRotation(Quaternion)](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#setRotation-nub.primitives.Quaternion-), [rotate(Quaternion)](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#rotate-nub.primitives.Quaternion-), [setScaling(float)](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#setScaling-float-) and [scale(float)](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#scale-float-), locally manipulates a node instance
+<li class="fragment"> `setPosition(Vector)`, `translate(Vector)`, `setOrientation(Quaternion)`, `rotate(Quaternion)`, `setMagnitude(float)` and `scale(float)`, locally manipulates a node instance
 
 V:
 
@@ -467,11 +467,11 @@ V:
 ### Using [nodes](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html)
 #### Advantages
 
-<li class="fragment"> [setPosition(Vector)](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#setPosition-nub.primitives.Vector-), [setOrientation(Quaternion)](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#setOrientation-nub.primitives.Quaternion-), and [setMagnitude(float)](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#setMagnitude-float-), globally manipulates node instances
+<li class="fragment"> `setWorldPosition(Vector)`, `setWorldOrientation(Quaternion)`, and `setWorldMagnitude(float)`, globally manipulates node instances
 <li class="fragment"> (the node methods) [location(Vector, Node)](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#location-nub.primitives.Vector-nub.core.Node-) and [displacement(Vector, Node)](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#displacement-nub.primitives.Vector-nub.core.Node-) transforms coordinates and vectors (resp.) from other node instances
 <li class="fragment"> (the node methods) [worldLocation(Vector)](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#worldLocation-nub.primitives.Vector-) and [worldDisplacement(Vector)](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#worldDisplacement-nub.primitives.Vector-) transforms node coordinates and vectors (resp.) to the world
 <li class="fragment"> (the graph methods) [location(vector, node)](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#location-nub.primitives.Vector-nub.core.Node-) and [screenLocation(vector, node)](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#screenLocation-nub.primitives.Vector-nub.core.Node-) transforms coordinates between node and screen space
-<li class="fragment"> [setConstraint(Constrain)](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#setConstraint-nub.core.constraint.Constraint-) applies a [Constraint](https://visualcomputing.github.io/nub-javadocs/nub/primitives/constraint/Constraint.html) to a node instance limiting its motion
+<li class="fragment"> Filtering mechanism which applies a filter to a node instance limiting its motion
 
 H:
 
