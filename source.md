@@ -63,8 +63,7 @@ Consider the following sequence of transformations:
 
 `where $M_n^*=M_1M_2...M_n$` <!-- .element: class="fragment" data-fragment-index="5"-->
 
-Mnemonic:<!-- .element: class="fragment" data-fragment-index="7"-->
-   The (left-to-right) $M_n^*=M_1M_2...M_n$ transformation sequence is performed respect to a local (mutable) coordinate system
+Observation 1: $M_n^$ may be implemented either as above with low-level matrix multiplication (`applyMatrix(matrix)`) or with the mid-level proessing functions such as `translate`, `rotate`, `scale`. <!-- .element: class="fragment" data-fragment-index="6"-->
 
 H:
 
