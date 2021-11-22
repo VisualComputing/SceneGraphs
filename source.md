@@ -63,7 +63,7 @@ Consider the following sequence of transformations:
 
 `where $M_n^*=M_1M_2...M_n$` <!-- .element: class="fragment" data-fragment-index="5"-->
 
-Observation 1: $M_n^$ may be implemented either as above with low-level matrix multiplication (`applyMatrix(matrix)`) or with the mid-level proessing functions such as `translate`, `rotate`, `scale`. <!-- .element: class="fragment" data-fragment-index="6"-->
+Observation 1: `$M_n^$` may be implemented either as above with low-level matrix multiplication (`applyMatrix(matrix)`) or with the mid-level proessing functions such as `translate`, `rotate`, `scale`. <!-- .element: class="fragment" data-fragment-index="6"-->
 
 H:
 
