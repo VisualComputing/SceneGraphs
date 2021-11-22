@@ -63,7 +63,7 @@ Consider the following sequence of transformations:
 
 `where $M_n^*=M_1M_2...M_n$` <!-- .element: class="fragment" data-fragment-index="5"-->
 
-Observation: The above composed transform may be implemented either with low-level matrix multiplication (applyMatrix(matrix)) or with the mid-level functions such as: translate(), rotate(), scale(). <!-- .element: class="fragment" data-fragment-index="6"-->
+Observation: The above composed transform may be implemented either with low-level matrix multiplication (applyMatrix(matrix)) or with mid-level functions such as: translate(), rotate(), scale(). <!-- .element: class="fragment" data-fragment-index="6"-->
 
 H:
 
@@ -216,7 +216,7 @@ V:
 ## Modelling and view
 ### Node notion
 
-> A node in [nub](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html) encapsulates the following affine (composed) transform: `$T(x,y,z) * R_u(\beta) * S(s)$`, `$s > 0$` read in left-to-right order (<a href="#/3/1">goto observation</a>)
+> A node in [nub](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html) encapsulates the following affine (composed) transform: `$T(x,y,z) * R_u(\beta) * S(s)$`, `$s > 0$`
 
 V:
 
@@ -260,17 +260,17 @@ V:
 function drawModel() {
   // define a local node L1 (respect to the world)
   push(); // saves current matrix transform (I)
-  affineTransform1(); // same as: I * affineTransform1()
+  affineTransform1(); // resulting in: I * affineTransform1()
   drawL1();
   // define a local node L2 respect to L1
   push(); // saves current matrix transform (I * affineTransform1())
-  affineTransform2(); // same as: I * affineTransform1() * affineTransform2()
+  affineTransform2(); // resulting in: I * affineTransform1() * affineTransform2()
   drawL2();
   // "return" to L1
   pop(); // removes the top of the stack, restoring I * affineTransform1()
   // define a local coordinate system L3 respect to L1
   push(); // saves current matrix transform (I * affineTransform1())
-  affineTransform3(); // same as: I * affineTransform1() * affineTransform3()
+  affineTransform3(); // resulting in: I * affineTransform1() * affineTransform3()
   drawL3();
   // return to L1
   pop(); // removes the top of the stack, restoring I * affineTransform1()
@@ -373,8 +373,7 @@ V:
 
 ```js
 let n1, n2, n3;
-void setup() {
-  scene = new Scene(this);
+function setup() {
   // Create a top-level (shapeless) node (i.e., a node whose reference is null) with:
   n1 = createNode();
   // whereas for the remaining nodes we pass any constructor taking a
