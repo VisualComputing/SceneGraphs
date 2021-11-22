@@ -386,24 +386,22 @@ V:
  n2  n3
 ```
 
-```processing
-Scene scene;
-Node n1, n2, n3;
+```js
+let n1, n2, n3;
 void setup() {
   scene = new Scene(this);
   // Create a top-level (shapeless) node (i.e., a node whose reference is null) with:
-  n1 = new Node();
+  n1 = createNode();
   // whereas for the remaining nodes we pass any constructor taking a
   // reference node parameter, such as Node(Node referenceNode)
-  n2 = new Node(n1);
-  n2.setShape((PGraphics pg) -> {
+  n2 = createNode(n1);
+  n2.setShape((pg) => {
                 pg.pushStyle();
                 pg.fill(255, 0, 0);
                 pg.box(80);
                 pg.popStyle();
   });
-  // Retained rendering mode
-  n3 = new Node(n1, createShape(BOX, 60));
+  n3 = createNode(n1);
 }
 ```
 
