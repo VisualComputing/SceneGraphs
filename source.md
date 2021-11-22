@@ -59,10 +59,13 @@ Consider the following sequence of transformations:
 `$P_1=M_1P,$` <!-- .element: class="fragment" data-fragment-index="1"-->
 `$P_2=M_1M_2P_1,$` <!-- .element: class="fragment" data-fragment-index="2"-->
 `$...,$` <!-- .element: class="fragment" data-fragment-index="3"-->
-`$P_n=M_n^*P$` `, where $M_n^*=M_1M_2...M_n$` <!-- .element: class="fragment" data-fragment-index="4"-->
+`$P_n=M_n^*P$` <!-- .element: class="fragment" data-fragment-index="4"-->
+
+which is the same as: <!-- .element: class="fragment" data-fragment-index="5"-->
+`$P_n=M_n^*P$, where $M_n^*=M_1M_2...M_n$` <!-- .element: class="fragment" data-fragment-index="5"-->
 
 Mnemonic:<!-- .element: class="fragment" data-fragment-index="7"-->
-   The (left-to-right) where `$M_n^*=M_1M_2...M_n$` transformation sequence is performed respect to a local (mutable) coordinate system
+   The (left-to-right) $M_n,...M_2M_1$ transformation sequence is performed respect to a local (mutable) coordinate system
 
 H:
 
