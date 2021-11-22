@@ -71,22 +71,6 @@ N:
 
 Mnemonic 2: The (right-to-left) $M_1M_2...M_n$ transformation sequence is performed respect to a world (fixed) coordinate system
 
-V:
-
-## Intro: Main spaces
-
-<figure>
-    <img height='400' src='fig/coordinate_systems.png'/>
-    <figcaption>Matrix transform operations</figcaption>
-</figure>
-
-N:
-
-rendering_pipeline.png
-1. Virtual camera: vertex specification & vertex shader
-2. Shading: fragment shader
-3. Visibility (z-buffer): per sample operations
-
 H:
 
 ## Modelling and view: Node notion
@@ -125,8 +109,8 @@ V:
 
 let's first call the `axes()` function to see what it does:
 
-```processing
-void draw() {
+```js
+function draw() {
   background(50);
   axes();
 }
@@ -141,8 +125,8 @@ V:
 
 now let's call it again, but pre-translating it first:
 
-```processing
-void draw() {
+```js
+function draw() {
   background(50);
   axes();
   translate(300, 180);//translation
@@ -159,8 +143,8 @@ V:
 
 let's add a rotation to the second `axes()` call:
 
-```processing
-void draw() {
+```js
+function draw() {
   background(50);
   axes();
   translate(300, 180);
@@ -178,8 +162,8 @@ V:
 
 let's do something similar with a third `axes()` call:
 
-```processing
-void draw() {
+```js
+function draw() {
   background(50);
   axes();
   translate(300, 180);
@@ -201,12 +185,12 @@ V:
 
 see the result when we animate only the _first_ rotation;
 
-```processing
-void draw() {
+```js
+function draw() {
   background(50);
   axes();
   translate(300, 180);
-  rotate(QUARTER_PI/2 * p.frameCount);//animation line
+  rotate(QUARTER_PI/2 * frameCount);//animation line
   axes();
   translate(260, -180);
   rotate(-QUARTER_PI);
@@ -224,15 +208,15 @@ V:
 
 and now see the result when we animate only the _second_ rotation;
 
-```processing
-void draw() {
+```js
+function draw() {
   background(50);
   axes();
   translate(300, 180);
   rotate(QUARTER_PI/2);
   axes();
   translate(260, -180);
-  rotate(-QUARTER_PI * p.frameCount);//animation line
+  rotate(-QUARTER_PI * frameCount);//animation line
   scale(1.5);
   axes();
 }
@@ -245,7 +229,7 @@ V:
 
 ## Modelling and view: Node notion
 
-> A node encapsulates an affine (composed) transform: `$M_i^*, 1 \geq i$` read in left-to-right order (<a href="#/3/1">goto mnemonic 2</a>)
+> A node encapsulates an affine (composed) transform: `$M_i^*, 1 \geq i$` read in left-to-right order (<a href="#/3/1">goto mnemonic</a>)
 
 > Note that the `$T(x,y,z) * R_u(\beta) * S(s)$`, `$s > 0$` definition is the one used in [nub](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html)
 
@@ -260,7 +244,7 @@ V:
 ## Modelling and view: [Scene-graph](https://github.com/VisualComputing/Transformations/blob/gh-pages/sketches/desktop/scenegraph/SceneGraph/SceneGraph.pde)
 ### Eyeless example
 
-```processing
+```js
  World
   ^
   |
@@ -270,14 +254,14 @@ V:
  L2  L3
 ```
 
-> Scenegraphs are simply and elegantly implemented by means of affine transformations using a matrix stack. See [pushMatrix()](https://processing.org/reference/pushMatrix_.html) and [popMatrix()](https://processing.org/reference/popMatrix_.html)
+> Scenegraphs are simply and elegantly implemented by means of affine transformations using a matrix stack. See [push()](https://processing.org/reference/push_.html) and [pop()](https://processing.org/reference/pop_.html)
 
 V:
 
 ## Modelling and view: [Scene-graph](https://github.com/VisualComputing/Transformations/blob/gh-pages/sketches/desktop/scenegraph/SceneGraph/SceneGraph.pde)
 ### Eyeless example
 
-```processing
+```js
  World
   ^
   |
@@ -287,26 +271,26 @@ V:
  L2  L3
 ```
 
-```processing
-void drawModel() {
+```js
+function drawModel() {
   // define a local node L1 (respect to the world)
-  pushMatrix(); // saves current matrix transform (I)
+  push(); // saves current matrix transform (I)
   affineTransform1(); // same as: I * affineTransform1()
   drawL1();
   // define a local node L2 respect to L1
-  pushMatrix(); // saves current matrix transform (I * affineTransform1())
+  push(); // saves current matrix transform (I * affineTransform1())
   affineTransform2(); // same as: I * affineTransform1() * affineTransform2()
   drawL2();
   // "return" to L1
-  popMatrix(); // removes the top of the stack, restoring I * affineTransform1()
+  pop(); // removes the top of the stack, restoring I * affineTransform1()
   // define a local coordinate system L3 respect to L1
-  pushMatrix(); // saves current matrix transform (I * affineTransform1())
+  push(); // saves current matrix transform (I * affineTransform1())
   affineTransform3(); // same as: I * affineTransform1() * affineTransform3()
   drawL3();
   // return to L1
-  popMatrix(); // removes the top of the stack, restoring I * affineTransform1()
+  pop(); // removes the top of the stack, restoring I * affineTransform1()
   // return to World
-  popMatrix(); // removes the top of the stack, restoring I
+  pop(); // removes the top of the stack, restoring I
 }
 ```
 <!-- .element: class="fragment" data-fragment-index="1"-->
@@ -323,7 +307,7 @@ V:
 ## Modelling and view: [Scene-graph](https://github.com/VisualComputing/Transformations/blob/gh-pages/sketches/desktop/scenegraph/SceneGraph/SceneGraph.pde)
 ### View transform (eye-node)
 
-```processing
+```js
  World
   ^
   |\
@@ -355,7 +339,7 @@ V:
 ## Modelling and view: Scene-graph
 ### [View](https://github.com/VisualComputing/Transformations/blob/gh-pages/sketches/desktop/scenegraph/MiniMap/MiniMap.pde) example
 
-```processing
+```js
  World
   ^
   |\
@@ -365,8 +349,8 @@ V:
  L2  L3
 ```
 
-```processing
-void draw() {
+```js
+function draw() {
   // the following sequence would position (orient, scale, ...) the eye node in the world:
   // translate(eyePosition.x, eyePosition.y);
   // rotate(eyeOrientation);
@@ -392,7 +376,7 @@ V:
 ## Modelling and view in [nub](https://visualcomputing.github.io/nub-javadocs/)
 ### [Node](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html) trees
 
-```processing
+```js
  World
   ^
   |\
@@ -411,13 +395,13 @@ void setup() {
   n1 = new Node();
   // whereas for the remaining nodes we pass any constructor taking a
   // reference node parameter, such as Node(Node referenceNode)
-  n2 = new Node(n1) {
-    // Immediate rendering mode
-    @Override
-    public void graphics(PGraphics pg) {
-      Scene.drawTorusSolenoid(pg);
-    }
-  };
+  n2 = new Node(n1);
+  n2.setShape((PGraphics pg) -> {
+                pg.pushStyle();
+                pg.fill(255, 0, 0);
+                pg.box(80);
+                pg.popStyle();
+  });
   // Retained rendering mode
   n3 = new Node(n1, createShape(BOX, 60));
 }
@@ -430,7 +414,7 @@ V:
 ## Modelling and view in [nub](https://visualcomputing.github.io/nub-javadocs/)
 ### [Node](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html) manual traversals
 
-```processing
+```js
  World
   ^
   |\
@@ -443,23 +427,23 @@ V:
 ```processing
 void draw() {
   // enter n1
-  pushMatrix();
-  scene.applyTransformation(n1);
+  push();
+  applyMatrix(n1.matrix());
   scene.draw(n1);
   // enter n2
-  pushMatrix();
-  scene.applyTransformation(n1);
+  push();
+  applyMatrix(n2.matrix());
   scene.draw(n2);
   // "return" to n1
-  popMatrix();
+  pop();
   // enter n3
-  pushMatrix();
-  scene.applyTransformation(n3);
+  push();
+  applyMatrix(n3.matrix());
   scene.draw(n3);
   // return to n1
-  popMatrix();
+  pop();
   // return to World
-  popMatrix();
+  pop();
 }
 ```
 
