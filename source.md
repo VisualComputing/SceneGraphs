@@ -61,8 +61,7 @@ Consider the following sequence of transformations:
 `$...,$` <!-- .element: class="fragment" data-fragment-index="3"-->
 `$P_n=M_n^*P$` <!-- .element: class="fragment" data-fragment-index="4"-->
 
-which is the same as: <!-- .element: class="fragment" data-fragment-index="5"-->
-`$P_n=M_n^*P$, where $M_n^*=M_1M_2...M_n$` <!-- .element: class="fragment" data-fragment-index="6"-->
+where `$M_n^*=M_1M_2...M_n$` <!-- .element: class="fragment" data-fragment-index="5"-->
 
 Mnemonic:<!-- .element: class="fragment" data-fragment-index="7"-->
    The (left-to-right) $M_n,...M_2M_1$ transformation sequence is performed respect to a local (mutable) coordinate system
