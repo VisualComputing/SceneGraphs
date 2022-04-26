@@ -32,7 +32,7 @@ H:
     * Composition
     * Main spaces
  2. Modelling and view<!-- .element: class="fragment" data-fragment-index="2"-->
- 3. Matrix handling in the nub framework<!-- .element: class="fragment" data-fragment-index="3"-->
+ 3. Matrix handling in the p5.treegl framework<!-- .element: class="fragment" data-fragment-index="3"-->
  4. References<!-- .element: class="fragment" data-fragment-index="4"-->
  
 H:
@@ -43,7 +43,7 @@ H:
 
 <img height='300' src='fig/image3.JPG'/>
 
-1. Check the Processing [2D transformations](https://processing.org/tutorials/transform2d/) tutorial by _J David Eisenberg_ first
+1. Check the [p5 transformations](https://www.youtube.com/watch?v=o9sgjuh-CBM) tutorial first
 2. Check also the [affine transformations](http://visualcomputing.github.io/Transformations) presentation
 
 N:
@@ -71,9 +71,9 @@ H:
 
 Consider the function `axes()` which draws the X (horizontal) and Y vertical) axes:
 
-```processing
+```js
 function axes() {
-  pushStyle();
+  push();
   // X-Axis
   strokeWeight(4);
   stroke(255, 0, 0);
@@ -85,7 +85,7 @@ function axes() {
   fill(0, 0, 255);
   line(0, 0, 0, 100);//vertical blue Y-axis line
   text("Y", 0, 100 + 15);
-  popStyle();
+  pop();
 }
 ```
 
@@ -213,20 +213,13 @@ function draw() {
 
 V:
 
-## Modelling and view
-### Node notion
-
-> A node in [nub](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html) encapsulates the following affine (composed) transform: `$T(x,y,z) * R_u(\beta) * S(s)$`, `$s > 0$`
-
-V:
-
-## Modelling and view: [Scene-graph](https://github.com/VisualComputing/Transformations/blob/gh-pages/sketches/desktop/scenegraph/SceneGraph/SceneGraph.pde)
+## Modelling and view: [Scene-graph](https://en.wikipedia.org/wiki/Scene_graph)
 
 > A scene-graph is a [directed acyclic graph (DAG)](https://en.wikipedia.org/wiki/Directed_acyclic_graph) of nodes which root is the world coordinate system
 
 V:
 
-## Modelling and view: [Scene-graph](https://github.com/VisualComputing/Transformations/blob/gh-pages/sketches/desktop/scenegraph/SceneGraph/SceneGraph.pde)
+## Modelling and view: Scene-graph
 ### Eyeless example
 
 ```js
@@ -239,11 +232,11 @@ V:
  L2  L3
 ```
 
-> Scenegraphs are simply and elegantly implemented by means of affine transformations using a matrix stack. See [push()](https://processing.org/reference/push_.html) and [pop()](https://processing.org/reference/pop_.html)
+> Scenegraphs are simply and elegantly implemented by means of affine transformations using a matrix stack. See [push()](https://p5js.org/reference/#/p5/push) and [pop()](https://p5js.org/reference/#/p5/pop)
 
 V:
 
-## Modelling and view: [Scene-graph](https://github.com/VisualComputing/Transformations/blob/gh-pages/sketches/desktop/scenegraph/SceneGraph/SceneGraph.pde)
+## Modelling and view: Scene-graph
 ### Eyeless example
 
 ```js
@@ -282,14 +275,14 @@ function drawModel() {
 
 V:
 
-## Modelling and view: [Scene-graph](https://github.com/VisualComputing/Transformations/blob/gh-pages/sketches/desktop/scenegraph/SceneGraph/SceneGraph.pde)
+## Modelling and view: Scene-graph
 ### Eyeless example
 
 <div id='scene-graph_id'></div>
 
 V:
 
-## Modelling and view: [Scene-graph](https://github.com/VisualComputing/Transformations/blob/gh-pages/sketches/desktop/scenegraph/SceneGraph/SceneGraph.pde)
+## Modelling and view: Scene-graph
 ### View transform (eye-node)
 
 ```js
@@ -322,7 +315,7 @@ in the world, but want it to be the other way around (i.e., draw the scene from 
 V:
 
 ## Modelling and view: Scene-graph
-### [View](https://github.com/VisualComputing/Transformations/blob/gh-pages/sketches/desktop/scenegraph/MiniMap/MiniMap.pde) example
+### View example
 
 ```js
  World
@@ -352,131 +345,14 @@ function draw() {
 V:
 
 ## Modelling and view: Scene-graph
-### [View](https://github.com/VisualComputing/Transformations/blob/gh-pages/sketches/desktop/scenegraph/MiniMap/MiniMap.pde) example
+### View example
 
 <div id='minimap_id'></div>
 
-V:
-
-## Modelling and view in [nub](https://visualcomputing.github.io/nub-javadocs/)
-### [Node](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html) trees
-
-```js
- World
-  ^
-  |\
- n1 eye
-  ^
-  |\
- n2  n3
-```
-
-```js
-let n1, n2, n3;
-function setup() {
-  // Create a top-level (shapeless) node (i.e., a node whose reference is null) with:
-  n1 = createNode();
-  // whereas for the remaining nodes we pass any constructor taking a
-  // reference node parameter, such as Node(Node referenceNode)
-  n2 = createNode(n1);
-  n2.setShape((pg) => {
-                pg.pushStyle();
-                pg.fill(255, 0, 0);
-                pg.box(80);
-                pg.popStyle();
-  });
-  n3 = createNode(n1);
-}
-```
-
-> Check [immediate](https://en.wikipedia.org/wiki/Immediate_mode_(computer_graphics%29) and [retained](https://en.wikipedia.org/wiki/Retained_mode) rendering modes
-
-V:
-
-## Modelling and view in [nub](https://visualcomputing.github.io/nub-javadocs/)
-### [Node](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html) manual traversals
-
-```js
- World
-  ^
-  |\
- n1 eye
-  ^
-  |\
- n2  n3
-```
-
-```js
-function draw() {
-  // enter n1
-  push();
-  applyMatrix(n1.matrix());
-  draw(n1);
-  // enter n2
-  push();
-  applyMatrix(n2.matrix());
-  draw(n2);
-  // "return" to n1
-  pop();
-  // enter n3
-  push();
-  applyMatrix(n3.matrix());
-  draw(n3);
-  // return to n1
-  pop();
-  // return to World
-  pop();
-}
-```
-
-V:
-
-## Modelling and view in [nub](https://visualcomputing.github.io/nub-javadocs/)
-### [Node](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html) automatic traversals
-
-```js
- World
-  ^
-  |\
- n1 eye
-  ^
-  |\
- n2  n3
-```
-
-```js
-function draw() {
-  render();
-}
-```
-
-V:
-
-## Modelling and view in [nub](https://visualcomputing.github.io/nub-javadocs/)
-### Using [nodes](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html)
-#### Advantages
-
-<li class="fragment"> The scene gets automatically rendered respect to the `eye` node
-<li class="fragment"> The graph topology is set (even at run time) with [setReference(node)](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#setReference-nub.core.Node-).
-<li class="fragment"> Nodes may be picked using ray-casting and the scene provides all sorts of interactivity commands to manipulate them.
-<li class="fragment"> `setPosition(Vector)`, `translate(Vector)`, `setOrientation(Quaternion)`, `rotate(Quaternion)`, `setMagnitude(float)` and `scale(float)`, locally manipulates a node instance
-
-V:
-
-## Modelling and view in [nub](https://visualcomputing.github.io/nub-javadocs/)
-### Using [nodes](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html)
-#### Advantages
-
-<li class="fragment"> `setWorldPosition(Vector)`, `setWorldOrientation(Quaternion)`, and `setWorldMagnitude(float)`, globally manipulates node instances
-<li class="fragment"> (the node methods) [location(Vector, Node)](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#location-nub.primitives.Vector-nub.core.Node-) and [displacement(Vector, Node)](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#displacement-nub.primitives.Vector-nub.core.Node-) transforms coordinates and vectors (resp.) from other node instances
-<li class="fragment"> (the node methods) [worldLocation(Vector)](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#worldLocation-nub.primitives.Vector-) and [worldDisplacement(Vector)](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#worldDisplacement-nub.primitives.Vector-) transforms node coordinates and vectors (resp.) to the world
-<li class="fragment"> (the graph methods) [location(vector, node)](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#location-nub.primitives.Vector-nub.core.Node-) and [screenLocation(vector, node)](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#screenLocation-nub.primitives.Vector-nub.core.Node-) transforms coordinates between node and screen space
-<li class="fragment"> Filtering mechanism which applies a filter to a node instance limiting its motion
-
 H:
 
-## Matrix handling in [nub](https://visualcomputing.github.io/nub-javadocs/)
-### Geometry data mapping
+## Matrix handling in [p5.treegl](https://github.com/VisualComputing/p5.treegl)
+### Intro: Geometry data mapping
 
 * The _model_ matrix (`$M$`) maps from (object) <a href="#/6/8">node</a> space to world space
 * The <a href="#/6/13">view</a> matrix (`$V$`) maps from world space to eye space
@@ -486,37 +362,74 @@ H:
 
 V:
 
-## Matrix handling in [nub](https://visualcomputing.github.io/nub-javadocs/)
-### Matrix stack naming conventions
+## Matrix handling in [p5.treegl](https://github.com/VisualComputing/p5.treegl)
+### Intro: Matrix stack naming conventions
 
 1. <a href="#/4/11">When the bottom of the matrix stack is filled with the identity matrix</a> (`$I$`), its top is referred to as the _model_ matrix
 2. <a href="#/4/17">When the bottom of the matrix stack is filled with the view matrix</a> (`$V$`), its top is referred to as the _modelview_ matrix
 
 V:
 
-## Matrix handling in [nub](https://visualcomputing.github.io/nub-javadocs/)
-### Main methods to retrieve the node matrices
+## Matrix handling in [p5.treegl](https://github.com/VisualComputing/p5.treegl)
+### [Basic matrices](https://github.com/VisualComputing/p5.treegl#basic-matrices)
 
-* Use [worldMatrix()](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#worldMatrix%28%29) to retrieve the node _model_ matrix
-* Use [view()](https://visualcomputing.github.io/nub-javadocs/nub/core/Node.html#view%28%29) to retrieve the node _view_ matrix.
+1. `iMatrix()`: Returns the identity matrix.
+2. `tMatrix(matrix)`: Returns the tranpose of `matrix`.
+3. `invMatrix(matrix)`: Returns the inverse of `matrix`.
+4. `axbMatrix(a, b)`: Returns the product of the `a` and `b` matrices.
+5. `lMatrix(from, to)`: Returns the 4x4 matrix that transforms locations (points) from matrix `from` to matrix `to`.
+6. `dMatrix(from, to)`: Returns the 3x3 matrix that transforms displacements (vectors) from matrix `from` to matrix `to`. The `nMatrix` below is a special case of this one.
 
-V:
-
-## Matrix handling in [nub](https://visualcomputing.github.io/nub-javadocs/)
-### Main methods to retrieve the scene cached matrices
-
-* Use [projection()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#projection%28%29) to retrieve the cached _projection_ matrix computed with the scene [eye()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#eye%28%29).
-* Use [view()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#view%28%29) to retrieve the cached _view_ matrix computed with the scene [eye()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#eye%28%29).
-* Use [projectionView()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#projectionView%28%29) to retrieve the cached _projection_ times _view_ matrix.
-* Use [projectionViewInverse()](https://visualcomputing.github.io/nub-javadocs/nub/core/Graph.html#projectionViewInverse%28%29) to retrieve the cached _projection_ times _view_ inverse matrix.
+**Observation:** All returned matrices are instances of [p5.Matrix](https://github.com/processing/p5.js/blob/main/src/webgl/p5.Matrix.js).
 
 V:
 
-## Matrix handling in [nub](https://visualcomputing.github.io/nub-javadocs/)
-### Main methods to compute the scene projection matrices
+## Matrix handling in [p5.treegl](https://github.com/VisualComputing/p5.treegl)
+### [Space transformations](https://github.com/VisualComputing/p5.treegl#space-transformations)
 
-* Use [orthographic(width, height, zNear, zFar)](https://visualcomputing.github.io/nub-javadocs/nub/primitives/Matrix.html#orthographic%28float,float,float,float%29) to compute the _orthographic_ matrix.
-* Use [perspective(magnitude, aspectRatio, zNear, zFar)](https://visualcomputing.github.io/nub-javadocs/nub/primitives/Matrix.html#perspective%28float,float,float,float%29) to compute the _perspective_ matrix.
+1. `treeLocation(vector, [{[from = SCREEN], [to = WORLD], [pMatrix], [vMatrix], [eMatrix], [pvMatrix], [pvInvMatrix]}])`: transforms locations (points) from matrix `from` to matrix `to`. 
+2. `treeDisplacement(vector, [{[from = EYE], [to = WORLD], [vMatrix], [eMatrix], [pMatrix]}])`: transforms displacements (vectors) from matrix `from` to matrix `to`.
+
+**Observations**
+
+1. Returned transformed vectors are instances of [p5.Vector](https://p5js.org/reference/#/p5.Vector).
+2. `from` and `to` may also be specified as either: `'WORLD'`, `'EYE'`, `'SCREEN'` or `'NDC'`.
+3. When no matrix params are passed the renderer [current values](#matrix-queries) are used instead.
+
+V:
+
+## Matrix handling in [p5.treegl](https://github.com/VisualComputing/p5.treegl)
+### [Matrix queries](https://github.com/VisualComputing/p5.treegl#matrix-queries)
+
+1. `pMatrix()`: Returns the current projection matrix.
+2. `mvMatrix([{[vMatrix], [mMatrix]}])`: Returns the modelview matrix.
+3. `mMatrix([{[eMatrix], [mvMatrix]}])`: Returns the model matrix.
+4. `eMatrix()`: Returns the current eye matrix (the inverse of `vMatrix()`). In addition to `p5` and [p5.RendererGL](https://p5js.org/reference/#/p5.Renderer) instances, this method is also available to [p5.Camera](https://p5js.org/reference/#/p5.Camera) objects.
+5. `vMatrix()`: Returns the view matrix (the inverse of `eMatrix()`). In addition to `p5` and [p5.RendererGL](https://p5js.org/reference/#/p5.Renderer) instances, this method is also available to [p5.Camera](https://p5js.org/reference/#/p5.Camera) objects.
+6. `pvMatrix([{[pMatrix], [vMatrix]}])`: Returns the projection times view matrix.
+7. `pvInvMatrix([{[pMatrix], [vMatrix], [pvMatrix]}])`: Returns the `pvMatrix` inverse.
+8. `nMatrix([{[vMatrix], [mMatrix], [mvMatrix]}])`: Returns the [normal matrix](http://www.lighthouse3d.com/tutorials/glsl-12-tutorial/the-normal-matrix/).
+
+**Observations**
+
+1. All returned matrices are instances of [p5.Matrix](https://github.com/processing/p5.js/blob/main/src/webgl/p5.Matrix.js).
+2. When no matrix params are passed the renderer [current values](#matrix-queries) are used instead.
+
+V:
+
+## Matrix handling in [p5.treegl](https://github.com/VisualComputing/p5.treegl)
+### [Frustum queries](https://github.com/VisualComputing/p5.treegl#frustum-queries)
+
+1. `lPlane([pMatrix])`: Returns the left clipping plane.
+2. `rPlane([pMatrix])`: Returns the right clipping plane.
+3. `bPlane([pMatrix])`: Returns the bottom clipping plane.
+4. `tPlane([pMatrix])`: Returns the top clipping plane.
+5. `nPlane([pMatrix])`: Returns the near clipping plane.
+6. `fPlane([pMatrix])`: Returns the far clipping plane.
+7. `fov([pMatrix])`: Returns the vertical field-of-view (fov) in radians.
+8. `hfov([pMatrix])`: Returns the horizontal field-of-view (hfov) in radians.
+
+**Observation:** when no projection (`pMatrix`) matrix is passed the renderer [current value](#matrix-queries) is used instead.
 
 H:
 
@@ -524,6 +437,6 @@ H:
 
 * [Math primer for graphics and game development](https://tfetimes.com/wp-content/uploads/2015/04/F.Dunn-I.Parberry-3D-Math-Primer-for-Graphics-and-Game-Development.pdf)
 * [Proscene: A feature-rich framework for interactive environments](https://www.sciencedirect.com/science/article/pii/S235271101730002X?_rdoc=1&_fmt=high&_origin=gateway&_docanchor=&md5=b8429449ccfc9c30159a5f9aeaa92ffb)
-* [Processing 2d transformations tutorial](https://www.processing.org/tutorials/transform2d/)
+* [p5 transformations tutorial](https://www.youtube.com/watch?v=o9sgjuh-CBM)
 * [OpenGL projection matrix](http://www.songho.ca/opengl/gl_projectionmatrix.html)
 * [The Perspective and Orthographic Projection Matrix](https://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix)
